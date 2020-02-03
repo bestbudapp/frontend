@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 
 
-
+//strain name, race, taste/flavor, description, positive/negative effects
+// filters: flavors, effects, ratings (1-5)
 
 const SearchForm = ({ }) => {
   const handleSubmit = e => {

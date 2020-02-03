@@ -1,9 +1,12 @@
 import * as types from "./ActionType";
 import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
-const loginApi = "https://bestbudapp.herokuapp.com/";
+// const loginApi = "https://bestbudapp.herokuapp.com/user/login";
+// const registerApi = "https://bestbudapp.herokuapp.com/user/register";
 
-// User Signup
+
+
+// User Signup start here
 export const userSignup = (userData, history) => dispatch => {
     axiosWithAuth()
       .post()
@@ -14,4 +17,14 @@ export const userSignup = (userData, history) => dispatch => {
       })
       .catch(error => console.log(error));
   };
-  //!! User Signup 
+  //!! User Signup end here
+
+
+
+// User Login && Logout start here
+// User Login && Logout end here
+
+
+
+// get SavedList start here
+// get SavedList end here
