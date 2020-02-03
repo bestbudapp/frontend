@@ -1,14 +1,14 @@
-import React from "react";
-import "./App.css";
+
+import React from 'react';
+import LandingPage from "./Components/LandingPage";
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <p>Med Cabinet</p>
-      </header>
-    </div>
-  );
-}
+    <LandingPage />
+  </div>
+);
+
 
 export default App;
