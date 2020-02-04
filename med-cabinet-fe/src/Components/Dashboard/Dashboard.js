@@ -61,15 +61,9 @@ export default function Dashboard() {
       </DashNavContainer>
       <Switch>
         <PrivateRoute path="/Dashboard/Search" component={SearchList} />
-        <PrivateRoute
-          path="/Dashboard/Recommend"
-          component={RecommendList}
+        <PrivateRoute path="/Dashboard/Recommend"component={RecommendList} />
 
-        <PrivateRoute
-          path="/Dashboard/PersonalCabinet"
-          component={CabinetList}
-
-        />
+        <PrivateRoute path="/Dashboard/PersonalCabinet" component={CabinetList}/>
       </Switch>
     </Container>
   );
