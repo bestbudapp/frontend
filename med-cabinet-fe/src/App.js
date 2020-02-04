@@ -5,13 +5,13 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-<<<<<<< HEAD
 
     <LandingPage />
   </div>
 )
   }
 
+<<<<<<< HEAD
 export default App
 =======
       <LandingPage />
@@ -24,3 +24,6 @@ export default App
 
 export default App;
 >>>>>>> 7f1bb250ba7f822aac42a76cfee930e3e56eeeee
+=======
+export default App;
+>>>>>>> c67b8598efbe75461202536ac5a00989241406f8
