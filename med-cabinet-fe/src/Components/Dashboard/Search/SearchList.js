@@ -4,9 +4,7 @@ import SearchCard from "./SearchCard";
 import SearchForm from "./SearchForm";
 
 export const SearchList = ({}) => {
-  useEffect(() => {
-   
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div>
@@ -16,5 +14,7 @@ export const SearchList = ({}) => {
   );
 };
 
-
-export default connect(SearchList);
+const mapStateToProps = state => {
+  return {};
+};
+export default connect(mapStateToProps, {})(SearchList);
