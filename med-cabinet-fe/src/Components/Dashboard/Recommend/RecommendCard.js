@@ -1,14 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 
-
-// 
-const RecommendCard = ({ recommended, saveRecommended }) => {
-    return (
-        <div>
-            <p></p>
-            <button>Save</button>
-        </div>
-    );
+//
+const RecommendCard = props => {
+  return (
+    <div>
+      <p></p>
+      <button>Save</button>
+    </div>
+  );
 };
-export default connect(RecommendCard);
+
+const mapStateToProps = state => {
+  return {};
+};
+export default connect(mapStateToProps, {})(RecommendCard);
