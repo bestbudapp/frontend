@@ -32,6 +32,11 @@ export const userLogin = (loginData, history) => dispatch => {
     })
     .catch(err => console.log(err));
 };
+
+export const logout = () => {
+  localStorage.removeItem("token");
+  return { type: types.LOGOUT };
+};
 // User Login && Logout end here
 
 
