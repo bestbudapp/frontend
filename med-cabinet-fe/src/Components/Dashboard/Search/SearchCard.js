@@ -1,22 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-// import * as ActionCreator from "../../../Actions/ActionCreator";
+import * as ActionCreator from "../../../Actions/ActionCreator";
 
 //will populate aprox 50 strains in alphabetical order
 // populate with popular recommended strains initially
-const SearchCard = ({ search }) => {
+const SearchCard = ({ Search }) => {
+ 
   return (
-    <div className="card-container">
-      {/* <p>{Search.strain}</p>
-        <p>{Search.Score}</p>
-        <p>{Search.Type}</p>
-        <p>{Search.THC_Percent}</p>
-        <p>{Search.CBD}</p>
-        <p>{Search.effect}</p>
+    <div>
+       <p>{Search.name}</p>
         <p>{Search.flavor}</p>
-        <p>{Search.Description1}</p>
-        <p>{Search.medical_effect_plain}</p>
-        <p>{Search.Recommendation}</p> */}
+        <p>{Search.race}</p>
+        <p>{Search.positive_effects}</p>
+        <p>{Search.negative_effects}</p>
+        <p>{Search.medical_conditions}</p>
+        <p>{Search.rating}</p>
+ 
 
       <button> Edit</button>
       <button> Delete</button>
@@ -26,4 +25,4 @@ const SearchCard = ({ search }) => {
 const mapStateToProps = state => {
   return {};
 };
-export default connect(mapStateToProps, {})(SearchCard);
+export default connect(mapStateToProps, ActionCreator)(SearchCard);
