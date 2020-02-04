@@ -5,6 +5,7 @@ import RecommendForm from "./RecommendForm";
 import RecommendCard from "./RecommendCard";
 
 export const RecommendList = props => {
+  console.log(props, props.strains);
   return (
     <div className="recommend-container">
       <RecommendForm />
@@ -13,6 +14,8 @@ export const RecommendList = props => {
   );
 };
 const mapStateToProps = state => {
-  return {};
+  return {
+    strains: state.strains
+  };
 };
 export default connect(mapStateToProps, {})(RecommendList);

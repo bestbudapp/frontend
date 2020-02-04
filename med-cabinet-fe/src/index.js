@@ -6,10 +6,10 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 // import logger from 'redux-logger'
 
-import { combinedReducer } from "./Reducers/combinedReducer";
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import combinedReducer from "./Reducers/combinedReducer";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
 const store = createStore(combinedReducer, applyMiddleware(thunk));
 

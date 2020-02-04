@@ -5,10 +5,9 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
+      <LandingPage />
+    </div>
+  );
+}
 
-    <LandingPage />
-  </div>
-)
-  }
-
-export default App
+export default App;
