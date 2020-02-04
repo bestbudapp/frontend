@@ -63,5 +63,14 @@ export const GetCabinet = () => dispatch => {
     })
     .catch(err => console.log(err));
 };
-
 // get SavedCabinet end here
+
+export const RemoveCabinetStrain = strain => dispatch => {
+  axiosWithAuth()
+    .delete(`https://bestbudapp.herokuapp.com/api/cabinet/${strain.cabinet_id}`)
+    .then(res => {
+      console.log("removed", res);
+      dispatch({ type: types.DELETE_CABINET_STRAINS, payload: res.data });
+    })
+    .catch(err => console.log(err));
+};

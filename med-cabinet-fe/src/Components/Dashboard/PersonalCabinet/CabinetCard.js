@@ -1,7 +1,7 @@
 //add heart or plus button
 import React from "react";
 
-const CabinetCard = ({ strain }) => {
+const CabinetCard = ({ strain, remove }) => {
   return (
     <div className="cabinet-card">
       <p className="cabinet-card-name">
@@ -17,6 +17,7 @@ const CabinetCard = ({ strain }) => {
         Medical Uses: {strain.medical_uses}
       </p>
       <p className="cabinet-card-desc">Description: {strain.description}</p>
+      <button onClick={() => remove(strain)}>Remove</button>
     </div>
   );
 };

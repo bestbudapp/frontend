@@ -28,6 +28,11 @@ const combinedReducer = (state = initialState, action) => {
         ...state,
         strains: action.payload
       };
+    case types.DELETE_CABINET_STRAINS:
+      console.log("DELETE_CABINET_STRAINS");
+      return {
+        ...state
+      };
     // add search, save, delete
     default:
       return state;
