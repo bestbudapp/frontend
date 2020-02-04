@@ -14,11 +14,14 @@ import CabinetList from "./PersonalCabinet/CabinetList";
 export default function Dashboard() {
   return (
     <>
-    <p>Dashboard</p>
+      <p>Dashboard</p>
       <Switch>
         <PrivateRoute path="/Dashboard/Search" component={SearchList} />
         <PrivateRoute path="/Dashboard/Recommend" component={RecommendList} />
-        <PrivateRoute path="/Dashboard/PersonalCabinet" component={CabinetList} />
+        <PrivateRoute
+          path="/Dashboard/PersonalCabinet"
+          component={CabinetList}
+        />
       </Switch>
     </>
   );
