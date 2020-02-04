@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as ActionCreator from "../Actions/ActionCreator";
 
+
 const Signup = ({ errors, touched, values, UserSignup, history }) => {
   const handleSignupSubmit = e => {
     e.preventDefault();
