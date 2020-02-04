@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../Utils/axiosWithAuth";
-
+import getStrains from "../Utils/getStrains";
 import * as types from "../Actions/ActionType";
 
 // const user = JSON.parse(localStorage.getItem("user"));
@@ -9,16 +9,7 @@ import * as types from "../Actions/ActionType";
 const initialState = {
   email: "jackBarry@test.com", //todo get from local storage here
   password: "password",
-  strains: axiosWithAuth()
-    .post("https://bestbudapp.herokuapp.com/api/strains", {
-      limit: 100,
-      offset: 1
-    })
-    .then(res => {
-      console.log(res);
-      return res.data;
-    })
-    .catch(err => console.log(err))
+  strains: getStrains()
 };
 
 const combinedReducer = (state = initialState, action) => {
