@@ -1,86 +1,101 @@
-import React from "react";
-import { Form, Field, withFormik } from "formik";
+import React, {useState} from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import * as ActionCreator from "../Actions/ActionCreator";
+// import * as ActionCreator from "../Actions/ActionCreator";
+import {UserSignup} from '../Actions/ActionCreator'
 
 
-const Signup = ({ errors, touched, values, UserSignup, history }) => {
-  const handleSignupSubmit = e => {
-    e.preventDefault();
-    UserSignup(values, history);
+//!!richard code start here
+//import styled components
+//!!richard code endhere
+
+const SignupForm = props => {
+const [values, setValues] = useState({
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: ""
+});
+
+const handleSubmit = evt => {
+  evt.preventDefault();
+  const userCredentials = {
+    username: values.email,
+    password: values.password
   };
-
-  return (
-    <div className="signup-container">
-      <Form className="signup-form" onSubmit={handleSignupSubmit}>
-        <div className="brand"></div>
-        <label className="signup-label">First Name:</label>
-        <Field
-          className="signup-field"
-          type="text"
-          name="first_name"
-          placeholder="First Name"
-        />
-        <small>(Between 2-24 characters)</small>
-        {touched.first_name && errors.first_name && (
-          <span className="error">{errors.first_name}</span>
-        )}
-        <label className="signup-label">Last Name:</label>
-        <Field
-          className="signup-field"
-          type="text"
-          name="lastName"
-          placeholder="Last Name"
-        />
-        <small>(Between 2-24 characters)</small>
-        {touched.lastName && errors.lastName && (
-          <span className="error">{errors.lastName}</span>
-        )}
-        <label className="signup-label">Email:</label>
-        <Field
-          className="signup-field"
-          type="email"
-          name="email"
-          placeholder="Email"
-        />
-        {touched.email && errors.email && (
-          <span className="error">{errors.email}</span>
-        )}
-        <label className="signup-label">Password:</label>
-        <Field
-          className="signup-field"
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-        <small>(Must be longer than 4 characters)</small>
-        {touched.password && errors.password && (
-          <span className="error">{errors.password}</span>
-        )}
-        <button className="btn" type="submit">
-          SIGN UP
-        </button>
-      </Form>
-      <NavLink className="form-link" to="/login">
-        Already have an account?
-      </NavLink>
-    </div>
-    //!!! SIGN UP Form  //
-  );
+  props.UserSignup(userCredentials)
 };
 
-// withFormik validation //
-const FormikSignup = withFormik({
-  mapPropsToValues({ first_name, lastName, email, password }) {
-    return {
-      first_name: first_name || "",
-      lastName: lastName || "",
-      email: email || "",
-      password: password || ""
-    };
-  }
-})(Signup);
-//!!! withFormik validation  //
+const handleChange = evt => {
+  evt.preventDefault();
+  setValues({
+    ...values,
+    [evt.target.name]: evt.target.value
+  });
+}
 
-export default connect(state => state, ActionCreator)(FormikSignup);
+
+return (
+  <div className="signup-container">
+    <form className="signup-form" onSubmit={handleSubmit}>
+      <div className="brand"></div>
+      <label className="signup-label">First Name:</label>
+      <input
+        className="signup-input"
+        type="text"
+        name="firstName"
+        placeholder="First Name"
+        onChange={handleChange}
+        value={values.firstName}
+      />
+      <small>(Between 2-24 characters)</small>
+
+      <label className="signup-label">Last Name:</label>
+      <input
+        className="signup-input"
+        type="text"
+        name="lastName"
+        placeholder="Last Name"
+        onChange={handleChange}
+        value={values.lastName}
+      />
+      <small>(Between 2-24 characters)</small>
+
+      <label className="signup-label">Email:</label>
+      <input
+        className="signup-input"
+        type="text"
+        name="email"
+        placeholder="Email"
+        onChange={handleChange}
+        value={values.email}
+      />
+
+      <label className="signup-label">Password:</label>
+      <input
+        className="signup-input"
+        type="password"
+        name="password"
+        placeholder="Password"
+        onChange={handleChange}
+        value={values.password}
+      />
+      <small>(Must be longer than 4 characters)</small>
+
+      <button className="btn" type="submit">
+        SIGN UP
+      </button>
+    </form>
+    <NavLink className="form-link" to="/login">
+      Already have an account?
+    </NavLink>
+  </div>
+  //!!! SIGN UP Form  //
+);
+}
+
+const mapStateToProps = state => {
+  return {}
+}
+
+export default connect(mapStateToProps, {UserSignup})(SignupForm);
