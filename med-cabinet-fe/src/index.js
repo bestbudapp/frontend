@@ -4,13 +4,14 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import {logger} from 'logger'
 
 import { combinedReducer } from "./Reducers/combinedReducer";
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(combinedReducer, applyMiddleware(thunk));
+const store = createStore(combinedReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,6 +1,8 @@
 import * as types from "../Actions/ActionType";
 
 const user = JSON.parse(localStorage.getItem("user"));
+//todo add password to localStorage
+
 
 export const initialState = {
   email: user ? user.email : "",
