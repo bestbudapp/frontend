@@ -1,31 +1,36 @@
 import React, {useState} from "react";
-import { Form, Field, withFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import * as ActionCreator from "../Actions/ActionCreator";
+import {UserLogin} from '../Actions/ActionCreator'
 
 
-const LoginForm = (props) => {
+const LoginForm = ({UserLogin, user}) => {
+  // console.log(props)
   const [values, setValues] = useState({
-    email: "",
-password: ""
+    email: user,
+    password: "password"
   })
   const handleSubmit = evt => {
     evt.preventDefault();
-    props.userLogin(values);
+    const userCredentials = {
+      username: values.email,
+      password: values.password
+    }
+   UserLogin(userCredentials);
   }
+
   const handleChange = (evt) => {
-    console.log("change", values)
     evt.preventDefault();
     setValues({
+      ...values,
       [evt.target.name]: evt.target.value
     })
   }
 
   return (
     <>
-    <Form className="login-form" onSubmit={handleSubmit}>
-      <label className="login-label"> Emaill: </label>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <label className="login-label"> Email: </label>
       <input
         className="login-field"
         type="email"
@@ -44,7 +49,7 @@ password: ""
         value={values.password}
       />
       <button>Login</button>
-    </Form>
+    </form>
     <NavLink className="form-link" to="/signup">
       Dont have an account?
       </NavLink>
@@ -52,56 +57,7 @@ password: ""
   )
 }
 
-
-// const Login = ({ errors, touched, values, userLogin, history   }) => {
-//     // const handleLoginSubmit = e => {
-//     //   e.preventDefault();
-//     //   userLogin(values, history);
-//     // };
-
-//     return (
-//       <div className="login-container">
-//       <Form className="login-form" onSubmit={handleLoginSubmit}>
-//         <label className="login-label"> Email: </label>
-//         <Field
-//           className="login-field"
-//           type="email"
-//           name="email"
-//           placeholder="Email"
-//         />
-//         {touched.email && errors.email && (
-//           <span className="error"> {errors.email} </span>
-//         )}
-//         <label className="login-label"> Password: </label>
-//         <Field
-//           className="login-field"
-//           type="password"
-//           name="password"
-//           placeholder="Password"
-//         />
-//         {touched.password && errors.password && (
-//           <span className="error"> {errors.password} </span>
-//         )}
-//         <button>Login</button>
-//       </Form>
-//       <NavLink className="form-link" to="/signup">
-//         Dont have an account?
-//       </NavLink>
-//     </div>
-//   );
-// };
-// const FormikLogin = withFormik({
-//   mapPropsToValues({ email, password }) {
-//     return {
-//       email: email || "",
-//       password: password || ""
-//     };
-//   },
-
-  
-// })(Login);
-//!!! withFormik validation  //
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return{
     user: state.email,
     passsword: state.password
@@ -109,4 +65,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, {ActionCreator})(LoginForm);
+export default connect(mapStateToProps, {UserLogin})(LoginForm);
