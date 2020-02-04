@@ -9,7 +9,7 @@ import * as types from "../Actions/ActionType";
 const initialState = {
   email: "jackBarry@test.com", //todo get from local storage here
   password: "password",
-  strains: getStrains()
+  strains: []
 };
 
 const combinedReducer = (state = initialState, action) => {
@@ -22,9 +22,13 @@ const combinedReducer = (state = initialState, action) => {
     case types.LOGIN:
       console.log(`Reducer LOGIN, ${action.type}`);
       return initialState;
-
+    case types.GET_CABINET_STRAINS:
+      console.log("GET_CABINET_STRAINS");
+      return {
+        ...state,
+        strains: action.payload
+      };
     // add search, save, delete
-
     default:
       return state;
   }
