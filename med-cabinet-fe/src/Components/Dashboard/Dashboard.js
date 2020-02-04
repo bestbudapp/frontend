@@ -1,9 +1,10 @@
 import React from "react";
 import { Switch } from "react-router-dom";
 // import styled from "styled-components";
-import PrivateRoute from "../../utils/PrivateRoute";
+import PrivateRoute from "../../Utils/PrivateRoute";
 import SearchList from "./Search/SearchList";
 import RecommendList from "./Recommend/RecommendList";
+import CabinetList from "./PersonalCabinet/CabinetList";
 
 // const Container = styled.div`
 //   display: flex;
@@ -16,6 +17,7 @@ export default function Dashboard() {
       <Switch>
         <PrivateRoute path="/Dashboard/Search" component={SearchList} />
         <PrivateRoute path="/Dashboard/Recommend" component={RecommendList} />
+        <PrivateRoute path="/Dashboard/PersonalCabinet" component={CabinetList} />
       </Switch>
     
   );
