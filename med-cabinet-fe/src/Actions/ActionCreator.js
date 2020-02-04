@@ -38,6 +38,8 @@ export const UserLogin = ({email, password, history}) => dispatch => {
     .then(res => {
       dispatch({ type: types.LOGIN });
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", email)
+      localStorage.setItem("password", password)
       // history.push("/Dashboard");
     })
     .catch(err => console.log(err));
