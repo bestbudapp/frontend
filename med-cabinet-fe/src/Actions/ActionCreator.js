@@ -53,3 +53,17 @@ export const Logout = () => {
 
 // get SavedList start here
 // get SavedList end here
+
+//!!get SearchList
+export const displaySearchList = Search => {
+  return { type: types.GET_SEARCH, payload: Search };
+};
+export const getSearchList = () => dispatch => {
+  axiosWithAuth()
+    .get("https://bestbudapp.herokuapp.com")
+    .then(({ data }) => {
+      dispatch(displaySearchList(data));
+    })
+    .catch(err => console.log(err));
+};
+//!! get SearchList

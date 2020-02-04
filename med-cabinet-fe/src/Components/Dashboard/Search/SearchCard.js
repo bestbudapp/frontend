@@ -4,10 +4,19 @@ import * as ActionCreator from "../../../Actions/ActionCreator";
 
 //will populate aprox 50 strains in alphabetical order
 // populate with popular recommended strains initially
-const SearchCard = ({ Search }) => {
- 
+const SearchCard = ({ Search,startEditSearch, deleteSearch }) => {
+
+ const onEdit = e => {
+    e.preventDefault();
+    startEditSearch(Search.id);
+  };
+  const onDelete = e => {
+    e.preventDefault();
+    deleteSearch(Search.id);
+  };
   return (
-    <div>
+    <>
+    <div className="card-container">
        <p>{Search.name}</p>
         <p>{Search.flavor}</p>
         <p>{Search.race}</p>
@@ -17,9 +26,10 @@ const SearchCard = ({ Search }) => {
         <p>{Search.rating}</p>
  
 
-      <button> Edit</button>
-      <button> Delete</button>
+        <button onClick={onEdit}>Edit</button>
+        <button onClick={onDelete}>Delete</button>
     </div>
+    </>
   );
 };
 const mapStateToProps = state => {

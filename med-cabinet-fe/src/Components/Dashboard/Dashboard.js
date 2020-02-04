@@ -25,9 +25,10 @@ const DashNavItem = styled.button`
   background: transparent;
   border-radius: 10px;
   border: 2px solid black;
+  background-color: azure;
   color: black;
   margin: 0.3em;
-  padding: 1em;
+  padding: 3em;
   font-weight: bold;
   text-decoration: none;
   min-width: 400px;
@@ -62,7 +63,6 @@ export default function Dashboard() {
       <Switch>
         <PrivateRoute path="/Dashboard/Search" component={SearchList} />
         <PrivateRoute path="/Dashboard/Recommend"component={RecommendList} />
-
         <PrivateRoute path="/Dashboard/PersonalCabinet" component={CabinetList}/>
       </Switch>
     </Container>
