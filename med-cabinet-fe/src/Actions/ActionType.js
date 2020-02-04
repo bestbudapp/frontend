@@ -1,2 +1,3 @@
 export const SIGN_UP = "SIGN_UP";
-export const ROOT_TEST = "ROOT_TEST";
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
