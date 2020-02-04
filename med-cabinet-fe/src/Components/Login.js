@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import {UserLogin} from '../Actions/ActionCreator'
 
 
+//!!richard code start here
+//import styled components
+//!!richard code endhere
+
 const LoginForm = ({UserLogin, user}) => {
   // console.log(props)
   const [values, setValues] = useState({
@@ -12,11 +16,8 @@ const LoginForm = ({UserLogin, user}) => {
   })
   const handleSubmit = evt => {
     evt.preventDefault();
-    const userCredentials = {
-      username: values.email,
-      password: values.password
-    }
-   UserLogin(userCredentials);
+   
+   UserLogin(values);
   }
 
   const handleChange = (evt) => {

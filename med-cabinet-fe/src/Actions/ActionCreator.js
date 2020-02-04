@@ -26,15 +26,19 @@ console.log("history", history)
 
 
 //!! User Login && Logout start here
-export const UserLogin = (loginData, history) => dispatch => {
-  console.log("User Creds", loginData)
-  // dispatch({type: types.LOGIN, payload: loginData})
+export const UserLogin = ({email, password, history}) => dispatch => {
+  // console.log("User Creds", loginData)
+// console.log(`props`, history)
+ const userCredentials = {
+   username: email,
+   password: password
+ };
   axiosWithAuth()
-    .post(loginApi, loginData)
+    .post(loginApi, userCredentials)
     .then(res => {
       dispatch({ type: types.LOGIN });
       localStorage.setItem("token", res.data.token);
-      history.push("/Dashboard");
+      // history.push("/Dashboard");
     })
     .catch(err => console.log(err));
 };
