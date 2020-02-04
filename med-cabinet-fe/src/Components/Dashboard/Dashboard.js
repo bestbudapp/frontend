@@ -40,6 +40,7 @@ const DashNavItem = styled.button`
 
 export default function Dashboard() {
   return (
+
     <Container>
       <DashNavContainer>
         <NavLink to="/Dashboard/Search">
@@ -63,6 +64,11 @@ export default function Dashboard() {
         <PrivateRoute
           path="/Dashboard/Recommend"
           component={RecommendList}
+
+        <PrivateRoute
+          path="/Dashboard/PersonalCabinet"
+          component={CabinetList}
+
         />
       </Switch>
     </Container>
