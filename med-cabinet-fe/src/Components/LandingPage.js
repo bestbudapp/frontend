@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect, Switch } from "react-router-dom";
+import { Route, Redirect, Switch, NavLink } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import PrivateRoute from "../Utils/PrivateRoute";
@@ -11,6 +11,8 @@ import CabinetList from "../Components/Dashboard/PersonalCabinet/CabinetList";
 export default function LandingPage() {
   return (
     <div>
+      <NavLink to="/Login">Login</NavLink>
+      <NavLink to="/Dashboard">Dashboard</NavLink>
       <Switch>
         <Redirect exact from="/" to="/Login" />
         <Route path="/Login" render={props => <Login {...props} />} />
