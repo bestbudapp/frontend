@@ -22,3 +22,4 @@ export const combinedReducer = (state = initialState, action) => {
 };
 
 export default [combinedReducer, initialState];
+
