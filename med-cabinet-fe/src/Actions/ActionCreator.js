@@ -1,6 +1,5 @@
 import * as types from "./ActionType";
 import { axiosWithAuth } from "../Utils/axiosWithAuth";
-import { Redirect } from "react-router-dom";
 
 const loginApi = "https://bestbudapp.herokuapp.com/api/auth/signin";
 const registerApi = "https://bestbudapp.herokuapp.com/api/auth/signup";
@@ -52,7 +51,6 @@ export const Logout = () => {
 };
 // User Login && Logout end here
 
-
 // get SavedList start here
 // get SavedList end here
 
@@ -93,3 +91,13 @@ export const RemoveCabinetStrain = strain => dispatch => {
     .catch(err => console.log(err));
 };
 
+// export const AddStrain = strain => dispatch => {
+//   const id = localStorage.getItem("userID");
+//   axiosWithAuth()
+//     .delete(`https://bestbudapp.herokuapp.com/api/cabinet/${id}`)
+//     .then(res => {
+//       console.log("removed", res);
+//       dispatch({ type: types.DELETE_CABINET_STRAINS, payload: res.data });
+//     })
+//     .catch(err => console.log(err));
+// };
