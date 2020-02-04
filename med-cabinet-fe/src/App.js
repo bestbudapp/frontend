@@ -8,7 +8,7 @@ function App() {
     <div className="App">
     <LandingPage />
   </div>
-);
+)
+  }
 
-
-export default App;
+export default App
