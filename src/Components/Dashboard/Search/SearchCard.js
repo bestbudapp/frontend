@@ -7,6 +7,7 @@ import hybrid from '../../../img/hybrid.png';
 import indica from '../../../img/indica.png';
 import sativa from '../../../img/sativa.png';
 
+
 const SearchCardContainer = styled.div`
   .search-card-container {
     margin: 0 auto;
