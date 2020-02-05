@@ -2,7 +2,77 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { axiosWithAuth } from "../../../Utils/axiosWithAuth";
 import RecommendList from './RecommendList';
+import styled from 'styled-components';
 
+const RecommendFormContainer = styled.div`
+  background: white;
+
+  h2 {
+    margin-top: 64px;
+    margin-bottom: 32px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+  }
+
+  form {
+    width: 768px;
+    margin: 40px auto;
+    display: flex;
+
+    select {
+      margin-right: 8px;
+      padding: 12px;
+      background-color: #46b430;
+      border: none;
+      border-radius: 3px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: white;
+      cursor: pointer;
+      transition: 0.25s;
+
+      :hover {
+        opacity: 0.9;
+      }
+    }
+
+    input {
+      width: 100%;
+      margin-right: 8px;
+      padding: 12px;
+      border: 1px solid lightgray;
+      border-radius: 3px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+
+      ::placeholder {
+        color: lightgray;
+      }
+    }
+
+    button {
+      padding: 12px;
+      background-color: #46b430;
+      border: none;
+      border-radius: 3px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: white;
+      cursor: pointer;
+      transition: 0.25s;
+
+      :hover {
+        opacity: 0.9;
+      }
+    }
+  }
+`;
 
 
 //make axios call from api
@@ -28,7 +98,7 @@ const RecommendForm = () => {
     
   };
 
-  return (<div>
+  return (<RecommendFormContainer>
     <form onSubmit={handleSubmit}>
       <label htmlFor="search"><span>Input Symptoms: </span></label>
       <input type="text" id="search" onChange={onInputChange}/><br/>
@@ -36,7 +106,7 @@ const RecommendForm = () => {
 
     </form>
     <RecommendList strains={strains}/>
-  </div>);
+  </RecommendFormContainer>);
 };
 const mapStateToProps = state => {
   return {};
