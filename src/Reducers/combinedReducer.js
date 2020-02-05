@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { axiosWithAuth } from "../Utils/axiosWithAuth";
-import getStrains from "../Utils/getStrains";
+// import { axiosWithAuth } from "../Utils/axiosWithAuth";
 import * as types from "../Actions/ActionType";
 
 // const user = JSON.parse(localStorage.getItem("user"));
