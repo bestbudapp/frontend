@@ -81,6 +81,7 @@ const RecommendCardContainer = styled.div`
 const RecommendCard = props => {
   return (
     <Link to={`/strain/${props.strain.id}`}>
+
       <RecommendCardContainer className="strain-card">
         {props.strain.race === "sativa" && <img src={sativa} alt="sativa" />}
         {props.strain.race === "indica" && <img src={indica} alt="indica" />}
@@ -89,6 +90,7 @@ const RecommendCard = props => {
         <p className="race">{props.strain.race}</p>
       </RecommendCardContainer>
     </Link>
+
   );
 };
 

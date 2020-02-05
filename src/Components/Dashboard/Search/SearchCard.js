@@ -9,6 +9,7 @@ import sativa from '../../../img/sativa.png';
 import { useParams } from 'react-router-dom';
 import { axiosWithAuth } from '../../../Utils/axiosWithAuth';
 
+
 const SearchCardContainer = styled.div`
   .search-card-container {
     margin: 0 auto;

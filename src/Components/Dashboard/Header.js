@@ -57,6 +57,10 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = () => {
+    const signout = () => {
+        localStorage.removeItem("token")
+        localStorage.removeItem("user_id")
+    }
     return(
         <HeaderContainer>
             <div className='header-container'>
@@ -66,7 +70,7 @@ const Header = () => {
                     <Link to='/strains'>Strain Search</Link>
                     <Link to='/cabinet'>My Cabinet</Link>
                 </nav>
-                <Link to='/' className='sign-out'>Sign Out</Link>
+                <Link to='/' className='sign-out' onClick={signout}>Sign Out</Link>
                 {/* needs to remove token from local storage, you can probably even leave out the redirect since the private route component does that for you */}
             </div>
         </HeaderContainer>
