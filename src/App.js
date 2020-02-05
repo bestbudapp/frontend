@@ -6,6 +6,7 @@ import SignUp from './Components/SignUp';
 import Dashboard from './Components/Dashboard/Dashboard';
 import SearchForm from './Components/Dashboard/Search/SearchForm';
 import SearchCard from './Components/Dashboard/Search/SearchCard';
+import RecommendForm from './Components/Dashboard/Recommend/RecommendForm';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Route path='/dashboard' component={Dashboard}/>
       <Route path='/strains' component={SearchForm}/>
       <Route path='/strain/:id' component={SearchCard}/>
+      <Route path='/recommender' component={RecommendForm}/>
 
       {/* // <NavLink to='/Login'>Login</NavLink>
       // <NavLink to='/Dashboard'>Dashboard</NavLink>
