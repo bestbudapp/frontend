@@ -1,20 +1,22 @@
-import React from 'react';
-import { Route, Redirect, Switch, NavLink } from 'react-router-dom';
-import PrivateRoute from './Utils/PrivateRoute';
-import SignIn from './Components/SignIn';
-import SignUp from './Components/SignUp';
-import Dashboard from './Components/Dashboard/Dashboard';
-import SearchForm from './Components/Dashboard/Search/SearchForm';
-import SearchCard from './Components/Dashboard/Search/SearchCard';
+import React from "react";
+import { Route, Redirect, Switch, NavLink } from "react-router-dom";
+import PrivateRoute from "./Utils/PrivateRoute";
+import SignIn from "./Components/SignIn";
+import SignUp from "./Components/SignUp";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import SearchForm from "./Components/Dashboard/Search/SearchForm";
+import SearchCard from "./Components/Dashboard/Search/SearchCard";
+import CabinetList from "./Components/Dashboard/PersonalCabinet/CabinetList";
 
 const App = () => {
   return (
     <>
-      <Route exact path='/' component={SignIn}/>
-      <Route path='/signup' component={SignUp}/>
-      <Route path='/dashboard' component={Dashboard}/>
-      <Route path='/strains' component={SearchForm}/>
-      <Route path='/strain/:id' component={SearchCard}/>
+      <Route exact path="/" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/strains" component={SearchForm} />
+      <Route path="/strain/:id" component={SearchCard} />
+      <Route path="/cabinet" component={CabinetList} />
 
       {/* // <NavLink to='/Login'>Login</NavLink>
       // <NavLink to='/Dashboard'>Dashboard</NavLink>
