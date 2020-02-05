@@ -10,7 +10,10 @@ const RecommendCard = props => {
   return (
     <Link to={`/strain/${props.strain.id}`}>
         <div className='strain-card'>
-            <img src={sativa} alt='sativa'/>
+        
+            {props.strain.race==='sativa'&&<img src={sativa} alt='sativa'/>}
+            {props.strain.race==='indica'&&<img src={indica} alt='indica'/>}
+            {props.strain.race==='hybrid'&&<img src={hybrid} alt='hybrid'/>}
             <p className='name'>{props.strain.name}</p>
             <p className='race'>{props.strain.race}</p>
         </div>
