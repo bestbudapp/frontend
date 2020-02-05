@@ -7,25 +7,38 @@ import * as types from "../Actions/ActionType";
 const initialState = {
   email: "jackBarry@test.com", //todo get from local storage here
   password: "password",
-  strains: []
+  strains: [],
+  queriedStrains: []
 };
 
 const combinedReducer = (state = initialState, action) => {
   // console.log(`Reducer state ${state}, action ${action.type}`)s
   // console.log(action.type)
   switch (action.type) {
+
     case types.SIGN_UP:
       console.log(`Reducer SIGN_UP, ${action.type}`);
       return state;
+
     case types.LOGIN:
       console.log(`Reducer LOGIN, ${action.type}`);
       return initialState;
+
+    case types.QUERY_STRAINS:
+      return{
+        ...state,
+        queriedStrains:action.payload
+      };
+      
+ 
+
     case types.GET_CABINET_STRAINS:
       console.log("GET_CABINET_STRAINS");
       return {
         ...state,
         strains: action.payload
       };
+
     case types.DELETE_CABINET_STRAINS:
       console.log("DELETE_CABINET_STRAINS");
       return {

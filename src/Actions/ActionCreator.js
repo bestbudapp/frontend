@@ -58,6 +58,7 @@ export const Logout = () => {
 export const displaySearchList = Search => {
   return { type: types.GET_SEARCH, payload: Search };
 };
+
 export const getSearchList = () => dispatch => {
   axiosWithAuth()
     .get("https://bestbudapp.herokuapp.com")
@@ -67,6 +68,22 @@ export const getSearchList = () => dispatch => {
     .catch(err => console.log(err));
 };
 //!! get SearchList
+
+//!!get Query_Strains
+export const queryStrains =(input) => dispatch =>{
+  axiosWithAuth()
+  .post("https://bestbudapp.herokuapp.com/api/strains/query", input)
+  .then(response =>{
+    console.log(response.data);
+    dispatch({ type: types.QUERY_STRAINS, payload: response.data });})
+  .catch(err => console.log(err));
+};
+
+
+
+//!! end get Query_Strains
+
+
 
 // get SavedCabinet start here
 export const GetCabinet = () => dispatch => {
