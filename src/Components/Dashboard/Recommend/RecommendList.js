@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import RecommendCard from "./RecommendCard";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const RecommendListContainer = styled.div`
   width: 1024px;
@@ -20,26 +20,27 @@ const RecommendListContainer = styled.div`
       height: 350px;
       width: 320px;
       border-radius: 3px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       transition: 0.25s;
-  
+
       img {
         width: 128px;
         margin-bottom: 16px;
       }
-  
+
       .name {
         margin-bottom: 4px;
         font-size: 1.25rem;
         font-weight: 600;
         color: #333;
       }
-  
+
       .race {
         // padding: 0 12px;
         // border: 1px solid lightgray;
@@ -48,7 +49,7 @@ const RecommendListContainer = styled.div`
         font-weight: 500;
         color: #333;
       }
-  
+
       :hover {
         box-shadow: none;
       }
@@ -63,21 +64,14 @@ const RecommendListContainer = styled.div`
 const RecommendList = props => {
   console.log(props.strains);
   return (
-    
     <RecommendListContainer className="recommend-container">
-      
       {props.strains.map(strain => {
-        
-        return (<RecommendCard strain={strain}/>)
-        
-      })
-    }
+        return <RecommendCard strain={strain} />;
+      })}
     </RecommendListContainer>
   );
 };
 const mapStateToProps = state => {
-  return {
-    
-  };
+  return {};
 };
 export default connect(mapStateToProps, {})(RecommendList);

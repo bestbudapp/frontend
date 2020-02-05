@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { axiosWithAuth } from "../../../Utils/axiosWithAuth";
-import RecommendList from './RecommendList';
-import styled from 'styled-components';
+import RecommendList from "./RecommendList";
+import styled from "styled-components";
 
 const RecommendFormContainer = styled.div`
   background: white;
@@ -27,7 +27,7 @@ const RecommendFormContainer = styled.div`
       background-color: #46b430;
       border: none;
       border-radius: 3px;
-      font-family: 'Quicksand', sans-serif;
+      font-family: "Quicksand", sans-serif;
       font-size: 1rem;
       font-weight: 500;
       color: white;
@@ -45,7 +45,7 @@ const RecommendFormContainer = styled.div`
       padding: 12px;
       border: 1px solid lightgray;
       border-radius: 3px;
-      font-family: 'Quicksand', sans-serif;
+      font-family: "Quicksand", sans-serif;
       font-size: 1rem;
       font-weight: 500;
       color: #333;
@@ -60,7 +60,7 @@ const RecommendFormContainer = styled.div`
       background-color: #46b430;
       border: none;
       border-radius: 3px;
-      font-family: 'Quicksand', sans-serif;
+      font-family: "Quicksand", sans-serif;
       font-size: 1rem;
       font-weight: 500;
       color: white;
@@ -74,39 +74,44 @@ const RecommendFormContainer = styled.div`
   }
 `;
 
-
 //make axios call from api
 //storing list of strains- that are recommended as a result of the data entered
 // have add (heart or plus sign) on each card that sends to cabinet
 
 const RecommendForm = () => {
-  const [strains, setStrains]=useState([]);
-  const [formData, setFormData]= useState("");
+  const [strains, setStrains] = useState([]);
+  const [formData, setFormData] = useState("");
   const onInputChange = event => {
-    console.log(formData)
-    setFormData(
-       event.target.value,
-    )}; 
+    console.log(formData);
+    setFormData(event.target.value);
+  };
   const handleSubmit = e => {
     e.preventDefault();
-    axiosWithAuth().post('https://bestbudapp.herokuapp.com/api/strains', {limit: 10, offset: 0})
-    .then(response =>{
-      setStrains(response.data)
-      console.log(strains)
-    })
-    .catch(err => console.log(err.response))
-    
+    axiosWithAuth()
+      .post("https://bestbudapp.herokuapp.com/api/strains", {
+        limit: 10,
+        offset: 0
+      })
+      .then(response => {
+        setStrains(response.data);
+        console.log(strains);
+      })
+      .catch(err => console.log(err.response));
   };
 
-  return (<RecommendFormContainer>
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="search"><span>Input Symptoms: </span></label>
-      <input type="text" id="search" onChange={onInputChange}/><br/>
-      <button type="submit">Submit</button>
-
-    </form>
-    <RecommendList strains={strains}/>
-  </RecommendFormContainer>);
+  return (
+    <RecommendFormContainer>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="search">
+          <span>Input Symptoms: </span>
+        </label>
+        <input type="text" id="search" onChange={onInputChange} />
+        <br />
+        <button type="submit">Submit</button>
+      </form>
+      <RecommendList strains={strains} />
+    </RecommendFormContainer>
+  );
 };
 const mapStateToProps = state => {
   return {};
