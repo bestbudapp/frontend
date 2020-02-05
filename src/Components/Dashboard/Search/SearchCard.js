@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as ActionCreator from '../../../Actions/ActionCreator';
 import Header from '../Header';
@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import hybrid from '../../../img/hybrid.png';
 import indica from '../../../img/indica.png';
 import sativa from '../../../img/sativa.png';
+import { useParams } from 'react-router-dom';
+import { axiosWithAuth } from '../../../Utils/axiosWithAuth';
 
 const SearchCardContainer = styled.div`
   .search-card-container {
@@ -78,9 +80,16 @@ const SearchCardContainer = styled.div`
   }
 `;
 
-const SearchCard = ({ Search,startEditSearch, deleteSearch }) => {
+const SearchCard = ( props ) => {
   // req.params.id to get id from url and make api call in use effect
-
+  const { id } = useParams();
+  const [strain, setStrain]=useState({});
+  useEffect (()=>{
+    axiosWithAuth().get(`https://bestbudapp.herokuapp.com/api/strains/${id}` )
+    .then(response => {
+      console.log(response.data)
+    })
+  },[id]);
   // commenting out for now
   // const onEdit = e => {
   //   e.preventDefault();
