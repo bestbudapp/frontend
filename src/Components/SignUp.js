@@ -5,6 +5,7 @@ import { UserSignup } from '../Actions/ActionCreator';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../img/logo.png';
+import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
 const SignUpContainer = styled.div`
 height: 90vh;
@@ -99,7 +100,17 @@ const SignUp = props => {
       username: values.email,
       password: values.password
     };
-    props.UserSignup(userCredentials)
+    //wasnt able to get props.history to work inside of an action
+    console.log(userCredentials);
+    axiosWithAuth().post('https://bestbudapp.herokuapp.com/api/auth/signup', userCredentials)
+
+    .then(response =>{
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user_id", response.data.id);
+      props.history.push("/dashboard")
+      console.log(response.data)
+    })
+    .catch(err => console.log(err.response))
   };
 
   const handleChange = evt => {

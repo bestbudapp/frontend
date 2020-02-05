@@ -17,17 +17,20 @@ const App = () => {
       <Route path='/strains' component={SearchForm}/>
       <Route path='/strain/:id' component={SearchCard}/>
       <Route path='/recommender' component={RecommendForm}/>
-
+      
+        {/* <PrivateRoute exact path='/Dashboard/Recommend'component={RecommendForm}/>
+        <PrivateRoute exact path='/Dashboard/Search' component={SearchForm} /> */}
+        {/* <PrivateRoute exact path='/Dashboard/PersonalCabinet' component={CabinetList} /> */}
       {/* // <NavLink to='/Login'>Login</NavLink>
       // <NavLink to='/Dashboard'>Dashboard</NavLink>
       // <Switch>
       //   <Redirect exact from='/' to='/Login' />
       //   <Route path='/Login' render={props => <Login {...props} />} />
       //   <Route path='/Signup' render={props => <Signup {...props} />} />
-      //   <PrivateRoute exact path='/Dashboard' component={Dashboard} />
-      //   <PrivateRoute exact path='/Dashboard/Recommend'component={RecommendList}/>
-      //   <PrivateRoute exact path='/Dashboard/Search' component={SearchList} />
-      //   <PrivateRoute exact path='/Dashboard/PersonalCabinet' component={CabinetList} />
+        // <PrivateRoute exact path='/Dashboard' component={Dashboard} />
+        // <PrivateRoute exact path='/Dashboard/Recommend'component={RecommendList}/>
+        // <PrivateRoute exact path='/Dashboard/Search' component={SearchList} />
+        // <PrivateRoute exact path='/Dashboard/PersonalCabinet' component={CabinetList} />
       // </Switch> */}
 
       {/*

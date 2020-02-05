@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { UserLogin } from '../Actions/ActionCreator';
 import styled from 'styled-components';
 import logo from '../img/logo.png';
+import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
 const SignInContainer = styled.div`
   height: 90vh;
@@ -84,17 +85,30 @@ const SignInContainer = styled.div`
   }
 `;
 
-const SignIn = ({UserLogin, user}) => {
+const SignIn = props => {
   const [values, setValues] = useState({
-    email: user,
-    password: 'password'
+    email:"",
+    password: ""
   });
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    UserLogin(values);
-  };
+    const userCredentials = {
+      username: values.email,
+      password: values.password
+    };
+    //wasnt able to get props.history to work inside of an action
+    axiosWithAuth().post('https://bestbudapp.herokuapp.com/api/auth/signin', userCredentials)
 
+    .then(response =>{
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user_id", response.data.id);
+      props.history.push("/dashboard")
+      console.log(response.data)
+    })
+    .catch(err => console.log(err.response))
+    
+  };
   const handleChange = (evt) => {
     evt.preventDefault();
     setValues({

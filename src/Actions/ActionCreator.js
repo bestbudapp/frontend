@@ -18,7 +18,7 @@ export const UserSignup = (userData, history) => dispatch => {
       localStorage.setItem("password", userData.password);
       localStorage.setItem("userID", res.data.id);
 
-      history.push("/Login");
+      history.push("/dashboard");
     })
     .catch(error => console.log(error));
 };

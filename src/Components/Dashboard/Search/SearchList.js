@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import hybrid from '../../../img/hybrid.png';
 import indica from '../../../img/indica.png';
 import sativa from '../../../img/sativa.png';
+import { axiosWithAuth } from '../../../Utils/axiosWithAuth';
 
 const SearchListContainer = styled.div`
   width: 1024px;
@@ -69,6 +70,8 @@ const SearchList = props => {
   useEffect(() => {
     props.getSearchList();
   }, []);
+
+  
 
   return (
     <SearchListContainer>
