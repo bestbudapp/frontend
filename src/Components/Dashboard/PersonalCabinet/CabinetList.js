@@ -95,7 +95,7 @@ const PersonalCabinet = ({ GetCabinet, strains, RemoveCabinetStrain }) => {
               />
             ))}
           </div>
-          <h2>Recommended Strains</h2>
+          
         </MyCabinetContainer>
       </>
     );

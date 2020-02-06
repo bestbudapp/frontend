@@ -114,7 +114,7 @@ const SearchCard = props => {
           <div className="information">
             <p className="race">{strain.race}</p>
             <h2>{strain.name}</h2>
-            <button onClick={saveToCabinet(strain.id)}>Save</button>
+            <button onClick={()=>saveToCabinet(strain.id)}>Save</button>
             <p className="rating">{strain.rating} stars</p>
             <p className="terpenes">Terpenes: {strain.flavors}</p>
           </div>
