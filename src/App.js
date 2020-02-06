@@ -7,6 +7,8 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import SearchForm from "./Components/Dashboard/Search/SearchForm";
 import SearchCard from "./Components/Dashboard/Search/SearchCard";
 import RecommendForm from "./Components/Dashboard/Recommend/RecommendForm";
+import CabinetList from "./Components/Dashboard/PersonalCabinet/CabinetList";
+import CabinetStrain from "./Components/Dashboard/PersonalCabinet/CabinetStrain";
 
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
       <PrivateRoute path="/strains" component={SearchForm} />
       <PrivateRoute path="/strain/:id" component={SearchCard} />
       <PrivateRoute path="/recommender" component={RecommendForm} />
+      <PrivateRoute exact path="/cabinet" component={CabinetList} />
+      <PrivateRoute exact path="/cabinet/strain/:id" component={CabinetStrain} />
     </>
   );
 };

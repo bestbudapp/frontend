@@ -16,7 +16,7 @@ export const UserSignup = (userData, history) => dispatch => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", userData.email);
       localStorage.setItem("password", userData.password);
-      localStorage.setItem("userID", res.data.id);
+      localStorage.setItem("user_id", res.data.id);
 
       history.push("/dashboard");
     })
@@ -39,7 +39,7 @@ export const UserLogin = ({ email, password, history }) => dispatch => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", email);
       localStorage.setItem("password", password);
-      localStorage.setItem("userID", res.data.id);
+      localStorage.setItem("user_id", res.data.id);
       // history.push("/Dashboard");
     })
     .catch(err => console.log(err));
@@ -78,16 +78,22 @@ export const queryStrains =(input) => dispatch =>{
     dispatch({ type: types.QUERY_STRAINS, payload: response.data });})
   .catch(err => console.log(err));
 };
-
-
-
 //!! end get Query_Strains
 
+
+// save strain to user's cabinet
+export const saveStrain = strain_id => dispatch => {
+  const user_id = localStorage.getItem('user_id');
+
+  axiosWithAuth().post(`https://bestbudapp.herokuapp.com/api/cabinet/${user_id}`, strain_id)
+    .then(response => console.log('strain saved'))
+    .catch(error => console.log(error));
+};
 
 
 // get SavedCabinet start here
 export const GetCabinet = () => dispatch => {
-  const id = localStorage.getItem("userID");
+  const id = localStorage.getItem("user_id");
   axiosWithAuth()
     .get(`https://bestbudapp.herokuapp.com/api/cabinet/${id}`)
     .then(res => {
@@ -98,9 +104,9 @@ export const GetCabinet = () => dispatch => {
 };
 // get SavedCabinet end here
 
-export const RemoveCabinetStrain = strain => dispatch => {
+export const RemoveCabinetStrain = cabinet_id => dispatch => {
   axiosWithAuth()
-    .delete(`https://bestbudapp.herokuapp.com/api/cabinet/${strain.cabinet_id}`)
+    .delete(`https://bestbudapp.herokuapp.com/api/cabinet/${cabinet_id}`)
     .then(res => {
       console.log("removed", res);
       dispatch({ type: types.DELETE_CABINET_STRAINS, payload: res.data });
@@ -109,7 +115,7 @@ export const RemoveCabinetStrain = strain => dispatch => {
 };
 
 // export const AddStrain = strain => dispatch => {
-//   const id = localStorage.getItem("userID");
+//   const id = localStorage.getItem("user_id");
 //   axiosWithAuth()
 //     .delete(`https://bestbudapp.herokuapp.com/api/cabinet/${id}`)
 //     .then(res => {
@@ -118,3 +124,9 @@ export const RemoveCabinetStrain = strain => dispatch => {
 //     })
 //     .catch(err => console.log(err));
 // };
+
+export const fetchCurrentCabinetStrain = strain_id => dispatch => {
+  axiosWithAuth().get(`https://bestbudapp.herokuapp.com/api/strains/${strain_id}`)
+    .then(res => dispatch({ type: types.UPDATE_CURRENT_CABINET_STRAIN, payload: res.data }))
+    .catch(err => console.log(err));
+};

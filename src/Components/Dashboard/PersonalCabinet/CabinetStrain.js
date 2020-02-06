@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { saveStrain } from "../../../Actions/ActionCreator";
+import { saveStrain, RemoveCabinetStrain } from "../../../Actions/ActionCreator";
 import Header from "../Header";
 import styled from "styled-components";
 import hybrid from "../../../img/hybrid.png";
@@ -9,7 +9,8 @@ import sativa from "../../../img/sativa.png";
 import { useParams } from "react-router-dom";
 import { axiosWithAuth } from "../../../Utils/axiosWithAuth";
 
-const SearchCardContainer = styled.div`
+
+const CabinetStrainContainer = styled.div`
   .search-card-container {
     margin: 0 auto;
     margin-top: 64px;
@@ -80,26 +81,28 @@ const SearchCardContainer = styled.div`
   }
 `;
 
-const SearchCard = props => {
+const CabinetStrain = props => {
   const { id } = useParams();
-  const [strain, setStrain] = useState({});
+//   const [strain, setStrain] = useState({});
 
   // richard mvp
-  useEffect(() => {
-    axiosWithAuth()
-      .get(`https://bestbudapp.herokuapp.com/api/strains/${id}`)
-      .then(response => {
-        setStrain(response.data);
-        console.log(response.data);
-      });
-  }, [id]);
+//   useEffect(() => {
+//       console.log(strain.strain_id)
+//     axiosWithAuth()
+//       .get(`https://bestbudapp.herokuapp.com/api/strains/${strain.strain_id}`)
+//       .then(response => {
+//         setStrain(response.data);
+//         console.log(response.data);
+//       });
+//   }, []);
 
-  const saveToCabinet = strain_id => {
-    props.saveStrain({strain_id: strain_id});
+  const removeFromCabinet = strain_id => {
+    props.RemoveCabinetStrain(strain_id);
+    props.history.push("/cabinet")
   };
 
   return (
-    <SearchCardContainer>
+    <CabinetStrainContainer>
       <Header />
       
       {/* go back button */}
@@ -107,30 +110,30 @@ const SearchCard = props => {
       <div className="search-card-container">
         <div className="first-section">
           <div className="image">
-            {strain.race === "sativa" && <img src={sativa} alt="sativa" />}
-            {strain.race === "indica" && <img src={indica} alt="indica" />}
-            {strain.race === "hybrid" && <img src={hybrid} alt="hybrid" />}
+            {props.strain.race === "sativa" && <img src={sativa} alt="sativa" />}
+            {props.strain.race === "indica" && <img src={indica} alt="indica" />}
+            {props.strain.race === "hybrid" && <img src={hybrid} alt="hybrid" />}
           </div>
           <div className="information">
-            <p className="race">{strain.race}</p>
-            <h2>{strain.name}</h2>
-            <button onClick={saveToCabinet(strain.id)}>Save</button>
-            <p className="rating">{strain.rating} stars</p>
-            <p className="terpenes">Terpenes: {strain.flavors}</p>
+            <p className="race">{props.strain.race}</p>
+            <h2>{props.strain.name}</h2>
+            <button onClick={() => removeFromCabinet(id)}>Remove</button>
+            <p className="rating">{props.strain.rating} stars</p>
+            <p className="terpenes">Terpenes: {props.strain.flavors}</p>
           </div>
         </div>
 
         <h3>Description</h3>
-        <p className="description">{strain.description}</p>
+        <p className="description">{props.strain.description}</p>
 
         <h3>Positive Effects</h3>
-        <p className="description">{strain.positive_effects}</p>
+        <p className="description">{props.strain.positive_effects}</p>
 
         <h3>Nagative Effects</h3>
-        <p className="description">{strain.negative_effects}</p>
+        <p className="description">{props.strain.negative_effects}</p>
 
         <h3>Medical Uses</h3>
-        <p className="description">{strain.medical_uses}</p>
+        <p className="description">{props.strain.medical_uses}</p>
         <h3>Reviews</h3>
         <p className="description">Reviews coming soon...</p>
         {/* stretch */}
@@ -160,11 +163,13 @@ const SearchCard = props => {
         <p className="description">This strain is not available near you.</p>
         {/* stretch */}
       </div>
-    </SearchCardContainer>
+    </CabinetStrainContainer>
   );
 };
 const mapStateToProps = state => {
-  return {};
+  return {
+      strain: state.currentCabinetStrain
+  };
 };
 
-export default connect(mapStateToProps, { saveStrain })(SearchCard);
+export default connect(mapStateToProps, { saveStrain, RemoveCabinetStrain })(CabinetStrain);

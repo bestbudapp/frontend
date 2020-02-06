@@ -6,6 +6,7 @@ import sativa from "../../../img/sativa.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+
 const RecommendCardContainer = styled.div`
   .search-card-container {
     margin: 0 auto;
@@ -80,9 +81,11 @@ const RecommendCardContainer = styled.div`
 //
 const RecommendCard = props => {
   return (
+    
     <Link to={`/strain/${props.strain.id}`}>
 
       <RecommendCardContainer className="strain-card">
+      
         {props.strain.race === "sativa" && <img src={sativa} alt="sativa" />}
         {props.strain.race === "indica" && <img src={indica} alt="indica" />}
         {props.strain.race === "hybrid" && <img src={hybrid} alt="hybrid" />}
