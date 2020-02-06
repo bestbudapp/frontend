@@ -8,7 +8,8 @@ const initialState = {
   email: "jackBarry@test.com", //todo get from local storage here
   password: "password",
   strains: [],
-  queriedStrains: []
+  queriedStrains: [],
+  currentCabinetStrain: {}
 };
 
 const combinedReducer = (state = initialState, action) => {
@@ -30,7 +31,11 @@ const combinedReducer = (state = initialState, action) => {
         queriedStrains:action.payload
       };
       
- 
+    case types.UPDATE_CURRENT_CABINET_STRAIN:
+      return {
+        ...state,
+        currentCabinetStrain: action.payload
+      };
 
     case types.GET_CABINET_STRAINS:
       console.log("GET_CABINET_STRAINS");

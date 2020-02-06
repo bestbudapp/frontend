@@ -91,7 +91,7 @@ const PersonalCabinet = ({ GetCabinet, strains, RemoveCabinetStrain }) => {
               <CabinetCard
                 strain={e}
                 key={e.strain_id}
-                remove={RemoveCabinetStrain}
+               
               />
             ))}
           </div>
