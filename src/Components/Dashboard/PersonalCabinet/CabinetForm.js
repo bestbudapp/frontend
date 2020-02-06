@@ -4,9 +4,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { AddStrain } from "../Actions/ActionCreator";
 
-//!!richard code start here
-//import styled components
-//!!richard code endhere
+
 
 const LoginForm = ({ UserLogin, user }) => {
   // console.log(props)

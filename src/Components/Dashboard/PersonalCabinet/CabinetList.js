@@ -5,6 +5,12 @@ import {
   GetCabinet,
   RemoveCabinetStrain
 } from "../../../Actions/ActionCreator";
+import Header from "../Header";
+import styled from "styled-components";
+
+const MyCabinetContainer= styled.div`
+  
+`;
 
 const PersonalCabinet = ({ GetCabinet, strains, RemoveCabinetStrain }) => {
   useEffect(() => {
@@ -12,9 +18,10 @@ const PersonalCabinet = ({ GetCabinet, strains, RemoveCabinetStrain }) => {
   }, []);
   if (strains) {
     return (
-      <>
-        <h2 className="cab-head">Personal Cabinet</h2>
-        <div className="cabinet-list">
+      <MyCabinetContainer>
+        <Header />
+        <h2>Personal Cabinet</h2>
+        <div className="search-card-container">
           {strains.map(e => (
             <CabinetCard
               strain={e}
@@ -23,7 +30,7 @@ const PersonalCabinet = ({ GetCabinet, strains, RemoveCabinetStrain }) => {
             />
           ))}
         </div>
-      </>
+      </MyCabinetContainer>
     );
   } else {
     return <p>Loading...</p>;

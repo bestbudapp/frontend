@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { axiosWithAuth } from "../../../Utils/axiosWithAuth";
 import RecommendList from "./RecommendList";
 import styled from "styled-components";
+import Header from "../Header";
 
 const RecommendFormContainer = styled.div`
   background: white;
@@ -101,6 +102,7 @@ const RecommendForm = () => {
 
   return (
     <RecommendFormContainer>
+            <Header />
       <form onSubmit={handleSubmit}>
         <label htmlFor="search">
           <span>Input Symptoms: </span>
