@@ -72,7 +72,7 @@ const SearchList = props => {
 
       {props.queriedStrains.map(item=>{
         return(
-          <Link to={`/strain/${item.id}`}>
+          <Link key={item.id} to={`/strain/${item.id}`}>
             <div className='strain-card'>
               {item.race === "sativa" && <img src={sativa} alt="sativa" />}
               {item.race === "indica" && <img src={indica} alt="indica" />}
