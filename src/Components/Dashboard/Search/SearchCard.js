@@ -49,6 +49,22 @@ const SearchCardContainer = styled.div`
           font-weight: 700;
           color: #333;
         }
+        .saveButton{
+          padding: 12px;
+          margin: 4px 0;
+          color: white;
+          background: #46b430;
+          font-family: "Quicksand", sans-serif;
+          font-weight: 600;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: 0.25s;
+          border: none;
+          border-radius: 3px;
+          :hover {
+            opacity: 0.75;
+          }
+        }
 
         .rating {
           font-size: 1rem;
@@ -114,7 +130,7 @@ const SearchCard = props => {
           <div className="information">
             <p className="race">{strain.race}</p>
             <h2>{strain.name}</h2>
-            <button onClick={()=>saveToCabinet(strain.id)}>Save</button>
+            <button className="saveButton" onClick={()=>saveToCabinet(strain.id)}>Save</button>
             <p className="rating">{strain.rating} stars</p>
             <p className="terpenes">Terpenes: {strain.flavors}</p>
           </div>
