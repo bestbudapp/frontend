@@ -123,8 +123,8 @@ const SignIn = props => {
       <h2>Sign In</h2>
 
       <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type='email' name='email' placeholder='Enter your email' value={values.email} onChange={handleChange}/>
+        <label>Username</label>
+        <input type='text' name='email' placeholder='Enter your email' value={values.email} onChange={handleChange}/>
 
         <label>Password</label>
         <input type='password' name='password' placeholder='Enter a password' value={values.password} onChange={handleChange}/>

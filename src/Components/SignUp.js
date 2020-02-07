@@ -1,95 +1,133 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-// import * as ActionCreator from '../Actions/ActionCreator';
 import { UserSignup } from '../Actions/ActionCreator';
+import { axiosWithAuth } from "../Utils/axiosWithAuth";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../img/logo.png';
-import { axiosWithAuth } from "../Utils/axiosWithAuth";
 
 const SignUpContainer = styled.div`
-height: 90vh;
-width: 414px;
-margin: 0 auto;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-
-img {
-  height: 64px;
-  margin-bottom: 8px;
-}
-
-h2 {
-  margin-bottom: 24px;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #333;
-}
-
-form {
-  width: 100%;
+  height: 90vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  label {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
-  }
-
-  input {
-    margin-bottom: 8px;
-    padding: 12px;
-    border: 1px solid lightgray;
+  .sign-up-container {
+    width: 1024px;
     border-radius: 3px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
 
-    ::placeholder {
-      color: lightgray;
+    .left {
+      width: 50%;
+      padding: 128px 64px;
+      border-right: 1px solid lightgray;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      img {
+        height: 48px;
+        width: 48px;
+        margin-bottom: 4px;
+      }
+  
+      .brand {
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+
+        h2 {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #333;
+        }
+      }
+
+      p {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+      }
+    }
+  
+    .right {
+      width: 50%;
+      padding: 128px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h2 {
+        margin-bottom: 24px;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #333;
+      }
+    
+      form {
+        width: 414px;
+        display: flex;
+        flex-direction: column;
+    
+        label {
+          font-size: 1rem;
+          font-weight: 500;
+          color: #333;
+        }
+    
+        input {
+          margin-bottom: 8px;
+          padding: 12px;
+          border: 1px solid lightgray;
+          border-radius: 3px;
+          font-family: 'Quicksand', sans-serif;
+          font-size: 1rem;
+          font-weight: 500;
+          color: #333;
+    
+          ::placeholder {
+            color: lightgray;
+          }
+        }
+    
+        button {
+          margin: 8px 0;
+          padding: 12px;
+          background: #46b430;
+          border: none;
+          border-radius: 3px;
+          font-family: 'Quicksand', sans-serif;
+          font-size: 1rem;
+          font-weight: 500;
+          color: white;
+          cursor: pointer;
+          transition: 0.25s;
+    
+          :hover {
+            opacity: 0.9;
+          }
+        }
+      }
+    
+      a {
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #333;
+        transition: 0.25s;
+    
+        :hover {
+          opacity: 0.5;
+        }
+      }
     }
   }
-
-  button {
-    margin: 8px 0;
-    padding: 12px;
-    background: #46b430;
-    border: none;
-    border-radius: 3px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    transition: 0.25s;
-
-    :hover {
-      opacity: 0.9;
-    }
-  }
-}
-
-a {
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #333;
-  transition: 0.25s;
-
-  :hover {
-    opacity: 0.5;
-  }
-}
 `;
 
 const SignUp = props => {
   const [values, setValues] = useState({
-    // firstName: '',
-    // lastName: '',
     email: '',
     password: ''
   });
@@ -100,6 +138,7 @@ const SignUp = props => {
       username: values.email,
       password: values.password
     };
+
     //wasnt able to get props.history to work inside of an action
     console.log(userCredentials);
     axiosWithAuth().post('https://bestbudapp.herokuapp.com/api/auth/signup', userCredentials)
@@ -123,30 +162,33 @@ const SignUp = props => {
 
   return (
     <SignUpContainer>
-      <img src={logo} alt='bestbud logo'/>
-      <h2>Sign Up</h2>
+      <div className='sign-up-container'>
 
-      <form onSubmit={handleSubmit}>
-        {/* <label>First Name:</label>
-        <input type='text' name='firstName' placeholder='First Name' value={values.firstName} onChange={handleChange}/>
-        <small>(Between 2-24 characters)</small>
+        <div className='left'>
+          <img src={logo} alt='bestbud logo'/>
+          <div className='brand'>
+            <h2>Welcome to bestBud,</h2>
+          </div>
+          <p>Create your free profile now to get instant access to recommendations from over 1500 cannabis strains based uniquely on your symptoms, desired effects, and more.</p>
+        </div>
 
-        <label>Last Name:</label>
-        <input type='text' name='lastName' placeholder='Last Name' value={values.lastName} onChange={handleChange}/>
-        <small>(Between 2-24 characters)</small> */}
+        <div className='right'>
+          <h2>Sign Up</h2>
 
-        <label>Email</label>
-        <input type='text' name='email' placeholder='Enter your email' value={values.email} onChange={handleChange}/>
+          <form onSubmit={handleSubmit}>
 
-        <label>Password</label>
-        <input type='password' name='password' placeholder='Enter a password' value={values.password} onChange={handleChange} minLength='4'/>
-        {/* <small>(Must be longer than 4 characters)</small> */}
-        {/* used a minlength tag instead */}
+            <label>Username</label>
+            <input type='text' name='email' placeholder='Enter your email' value={values.email} onChange={handleChange}/>
 
-        <button type='submit'>Sign Up</button>
-      </form>
+            <label>Password</label>
+            <input type='password' name='password' placeholder='Enter a password' value={values.password} onChange={handleChange} minLength='4'/>
 
-      <Link to='/'>Already have an account? Sign in here.</Link>
+            <button type='submit'>Sign Up</button>
+          </form>
+
+          <Link to='/'>Already have an account? Sign in here.</Link>
+        </div>
+      </div>
     </SignUpContainer>
   );
 };
