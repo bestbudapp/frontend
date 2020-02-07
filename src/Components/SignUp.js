@@ -178,7 +178,7 @@ const SignUp = props => {
           <form onSubmit={handleSubmit}>
 
             <label>Username</label>
-            <input type='text' name='email' placeholder='Enter your email' value={values.email} onChange={handleChange}/>
+            <input type='text' name='email' placeholder='Enter a username' value={values.email} onChange={handleChange}/>
 
             <label>Password</label>
             <input type='password' name='password' placeholder='Enter a password' value={values.password} onChange={handleChange} minLength='4'/>
