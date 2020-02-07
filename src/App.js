@@ -16,14 +16,14 @@ import CabinetList from "./Components/Dashboard/PersonalCabinet/CabinetList";
 import RecommendForm from "./Components/Dashboard/Recommend/RecommendForm";
 import CabinetList from "./Components/Dashboard/PersonalCabinet/CabinetList";
 import CabinetStrain from "./Components/Dashboard/PersonalCabinet/CabinetStrain";
->>>>>>> a0320c123f11c8b02185780e881a0b88469d3c53
+
 
 const App = () => {
   return (
     <>
       <Route exact path="/" component={SignIn} />
       <Route path="/signup" component={SignUp} />
-<<<<<<< HEAD
+
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/strains" component={SearchForm} />
       <Route path="/strain/:id" component={SearchCard} />
@@ -54,14 +54,14 @@ const App = () => {
       - deleted dispensary folder, i will merge that into the individual strain cards
       - strain search database styling
       */}
-=======
+
       <PrivateRoute path="/dashboard" component={Dashboard} />
       <PrivateRoute path="/strains" component={SearchForm} />
       <PrivateRoute path="/strain/:id" component={SearchCard} />
       <PrivateRoute path="/recommender" component={RecommendForm} />
       <PrivateRoute exact path="/cabinet" component={CabinetList} />
       <PrivateRoute exact path="/cabinet/strain/:id" component={CabinetStrain} />
->>>>>>> a0320c123f11c8b02185780e881a0b88469d3c53
+
     </>
   );
 };

@@ -70,26 +70,26 @@ export const getSearchList = () => dispatch => {
 //!! get SearchList
 
 //!!get Query_Strains
-export const queryStrains =(input) => dispatch =>{
+export const queryStrains = input => dispatch => {
   axiosWithAuth()
-  .post("https://bestbudapp.herokuapp.com/api/strains/query", input)
-  .then(response =>{
-    console.log(response.data);
-    dispatch({ type: types.QUERY_STRAINS, payload: response.data });})
-  .catch(err => console.log(err));
+    .post("https://bestbudapp.herokuapp.com/api/strains/query", input)
+    .then(response => {
+      console.log(response.data);
+      dispatch({ type: types.QUERY_STRAINS, payload: response.data });
+    })
+    .catch(err => console.log(err));
 };
 //!! end get Query_Strains
 
-
 // save strain to user's cabinet
 export const saveStrain = strain_id => dispatch => {
-  const user_id = localStorage.getItem('user_id');
+  const user_id = localStorage.getItem("user_id");
 
-  axiosWithAuth().post(`https://bestbudapp.herokuapp.com/api/cabinet/${user_id}`, strain_id)
-    .then(response => console.log('strain saved'))
+  axiosWithAuth()
+    .post(`https://bestbudapp.herokuapp.com/api/cabinet/${user_id}`, strain_id)
+    .then(response => console.log("strain saved"))
     .catch(error => console.log(error));
 };
-
 
 // get SavedCabinet start here
 export const GetCabinet = () => dispatch => {
@@ -126,7 +126,10 @@ export const RemoveCabinetStrain = cabinet_id => dispatch => {
 // };
 
 export const fetchCurrentCabinetStrain = strain_id => dispatch => {
-  axiosWithAuth().get(`https://bestbudapp.herokuapp.com/api/strains/${strain_id}`)
-    .then(res => dispatch({ type: types.UPDATE_CURRENT_CABINET_STRAIN, payload: res.data }))
+  axiosWithAuth()
+    .get(`https://bestbudapp.herokuapp.com/api/strains/${strain_id}`)
+    .then(res =>
+      dispatch({ type: types.UPDATE_CURRENT_CABINET_STRAIN, payload: res.data })
+    )
     .catch(err => console.log(err));
 };
