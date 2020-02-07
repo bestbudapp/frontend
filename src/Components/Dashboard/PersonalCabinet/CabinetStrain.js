@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { saveStrain, RemoveCabinetStrain } from "../../../Actions/ActionCreator";
+import { useParams } from "react-router-dom";
 import Header from "../Header";
 import styled from "styled-components";
 import hybrid from "../../../img/hybrid.png";
 import indica from "../../../img/indica.png";
 import sativa from "../../../img/sativa.png";
-import { useParams } from "react-router-dom";
-import { axiosWithAuth } from "../../../Utils/axiosWithAuth";
 
 
 const CabinetStrainContainer = styled.div`
@@ -92,24 +91,21 @@ const CabinetStrainContainer = styled.div`
       font-size: 1rem;
       font-weight: 500;
       color: #333;
+
+      a {
+        color: #46b430;
+        transition: 0.25s;
+
+        :hover {
+          opacity: 0.75;
+        }
+      }
     }
   }
 `;
 
 const CabinetStrain = props => {
   const { id } = useParams();
-//   const [strain, setStrain] = useState({});
-
-  // richard mvp
-//   useEffect(() => {
-//       console.log(strain.strain_id)
-//     axiosWithAuth()
-//       .get(`https://bestbudapp.herokuapp.com/api/strains/${strain.strain_id}`)
-//       .then(response => {
-//         setStrain(response.data);
-//         console.log(response.data);
-//       });
-//   }, []);
 
   const removeFromCabinet = strain_id => {
     props.RemoveCabinetStrain(strain_id);
@@ -134,7 +130,7 @@ const CabinetStrain = props => {
             <h2>{props.strain.name}</h2>
             <button className="saveButton" onClick={() => removeFromCabinet(id)}>Remove</button>
             <p className="rating">{props.strain.rating} stars</p>
-            <p className="terpenes">Terpenes: {props.strain.flavors}</p>
+            <p className="terpenes">Flavors: {props.strain.flavors}</p>
           </div>
         </div>
 
@@ -144,14 +140,14 @@ const CabinetStrain = props => {
         <h3>Positive Effects</h3>
         <p className="description">{props.strain.positive_effects}</p>
 
-        <h3>Nagative Effects</h3>
+        <h3>Negative Effects</h3>
         <p className="description">{props.strain.negative_effects}</p>
 
         <h3>Medical Uses</h3>
         <p className="description">{props.strain.medical_uses}</p>
+
         <h3>Reviews</h3>
         <p className="description">Reviews coming soon...</p>
-        {/* stretch */}
 
         <h3>Dosing</h3>
         <p className="description">
@@ -176,11 +172,11 @@ const CabinetStrain = props => {
 
         <h3>Dispensaries Nearby</h3>
         <p className="description">This strain is not available near you.</p>
-        {/* stretch */}
       </div>
     </CabinetStrainContainer>
   );
 };
+
 const mapStateToProps = state => {
   return {
       strain: state.currentCabinetStrain

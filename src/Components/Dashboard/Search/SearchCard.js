@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { saveStrain } from "../../../Actions/ActionCreator";
+import { useParams } from "react-router-dom";
+import { axiosWithAuth } from "../../../Utils/axiosWithAuth";
 import Header from "../Header";
 import styled from "styled-components";
 import hybrid from "../../../img/hybrid.png";
 import indica from "../../../img/indica.png";
 import sativa from "../../../img/sativa.png";
-import { useParams } from "react-router-dom";
-import { axiosWithAuth } from "../../../Utils/axiosWithAuth";
 
 const SearchCardContainer = styled.div`
   .search-card-container {
@@ -49,6 +49,7 @@ const SearchCardContainer = styled.div`
           font-weight: 700;
           color: #333;
         }
+
         .saveButton{
           padding: 12px;
           margin: 4px 0;
@@ -92,21 +93,29 @@ const SearchCardContainer = styled.div`
       font-size: 1rem;
       font-weight: 500;
       color: #333;
+
+      a {
+        color: #46b430;
+        transition: 0.25s;
+
+        :hover {
+          opacity: 0.75;
+        }
+      }
     }
   }
 `;
 
 const SearchCard = props => {
-  const { id } = useParams();
   const [strain, setStrain] = useState({});
 
-  // richard mvp
+  const { id } = useParams();
+  
   useEffect(() => {
     axiosWithAuth()
       .get(`https://bestbudapp.herokuapp.com/api/strains/${id}`)
       .then(response => {
         setStrain(response.data);
-        console.log(response.data);
       });
   }, [id]);
 
@@ -116,9 +125,7 @@ const SearchCard = props => {
 
   return (
     <SearchCardContainer>
-      <Header />
-      
-      {/* go back button */}
+      <Header/>
 
       <div className="search-card-container">
         <div className="first-section">
@@ -132,7 +139,7 @@ const SearchCard = props => {
             <h2>{strain.name}</h2>
             <button className="saveButton" onClick={()=>saveToCabinet(strain.id)}>Save</button>
             <p className="rating">{strain.rating} stars</p>
-            <p className="terpenes">Terpenes: {strain.flavors}</p>
+            <p className="terpenes">Flavors: {strain.flavors}</p>
           </div>
         </div>
 
@@ -142,14 +149,14 @@ const SearchCard = props => {
         <h3>Positive Effects</h3>
         <p className="description">{strain.positive_effects}</p>
 
-        <h3>Nagative Effects</h3>
+        <h3>Negative Effects</h3>
         <p className="description">{strain.negative_effects}</p>
 
         <h3>Medical Uses</h3>
         <p className="description">{strain.medical_uses}</p>
+
         <h3>Reviews</h3>
         <p className="description">Reviews coming soon...</p>
-        {/* stretch */}
 
         <h3>Dosing</h3>
         <p className="description">
@@ -170,15 +177,15 @@ const SearchCard = props => {
         </p>
 
         {/* <h3>Intake Schedule</h3>
-        blog post or article on this topic or something else */}
+        blog post or article on this topic */}
 
         <h3>Dispensaries Nearby</h3>
         <p className="description">This strain is not available near you.</p>
-        {/* stretch */}
       </div>
     </SearchCardContainer>
   );
 };
+
 const mapStateToProps = state => {
   return {};
 };

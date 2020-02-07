@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-// import * as ActionCreator from "../../../Actions/ActionCreator";
 import Header from '../Header';
 import SearchList from './SearchList';
 import styled from 'styled-components';
@@ -8,6 +7,32 @@ import { queryStrains } from '../../../Actions/ActionCreator'
 
 const SearchFormContainer = styled.div`
   background: white;
+
+  .go-back-container {
+    width: 1024px;
+    margin: 0 auto;
+    margin-top: 32px;
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+
+      i {
+        margin-left: 4px;
+        margin-right: 4px;
+        transition: 0.25s;
+      }
+
+      :hover {
+        i {
+          margin-left: 0;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
 
   h2 {
     margin-top: 64px;
@@ -105,6 +130,11 @@ const SearchForm = props => {
   return (
     <SearchFormContainer>
       <Header/>
+
+      <div className='go-back-container'>
+        <p onClick={() => props.history.push('/dashboard')}><i className="fas fa-arrow-left"></i>go back</p>
+      </div>
+
       <h2>Strain Search</h2>
 
       <form onSubmit={onSubmit}>

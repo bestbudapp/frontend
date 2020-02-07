@@ -62,16 +62,17 @@ const RecommendListContainer = styled.div`
 `;
 
 const RecommendList = props => {
-  console.log(props.strains);
   return (
     <RecommendListContainer className="recommend-container">
       {props.strains.map(strain => {
-        return <RecommendCard strain={strain} />;
+        return <RecommendCard key={strain.id} strain={strain} />;
       })}
     </RecommendListContainer>
   );
 };
+
 const mapStateToProps = state => {
   return {};
 };
+
 export default connect(mapStateToProps, {})(RecommendList);

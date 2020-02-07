@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { getSearchList } from '../../../Actions/ActionCreator';
 import { Link } from 'react-router-dom';
-import SearchCard from './SearchCard';
 import styled from 'styled-components';
 import hybrid from '../../../img/hybrid.png';
 import indica from '../../../img/indica.png';
 import sativa from '../../../img/sativa.png';
-import { axiosWithAuth } from '../../../Utils/axiosWithAuth';
 
 const SearchListContainer = styled.div`
   width: 1024px;

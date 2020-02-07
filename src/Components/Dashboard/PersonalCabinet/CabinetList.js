@@ -1,9 +1,35 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import CabinetCard from "./CabinetCard";
-import { GetCabinet, RemoveCabinetStrain } from "../../../Actions/ActionCreator";
+import { GetCabinet } from "../../../Actions/ActionCreator";
 import Header from "../Header";
 import styled from "styled-components";
+
+const GoBackContainer = styled.div`
+  width: 1024px;
+  margin: 0 auto;
+  margin-top: 32px;
+
+  p {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+
+    i {
+      margin-left: 4px;
+      margin-right: 4px;
+      transition: 0.25s;
+    }
+
+    :hover {
+      i {
+        margin-left: 0;
+        margin-right: 8px;
+      }
+    }
+  }
+`;
 
 const MyCabinetContainer= styled.div`
   background: white;
@@ -75,19 +101,24 @@ const MyCabinetContainer= styled.div`
   }
 `;
 
-const PersonalCabinet = ({ GetCabinet, strains, RemoveCabinetStrain }) => {
+const PersonalCabinet = props => {
   useEffect(() => {
-    GetCabinet();
+    props.GetCabinet();
   }, []);
   
-  if (strains) {
+  if (props.strains) {
     return (
       <>
         <Header />
+
+        <GoBackContainer>
+          <p onClick={() => props.history.push('/dashboard')}><i className="fas fa-arrow-left"></i>go back</p>
+        </GoBackContainer>
+
         <MyCabinetContainer>
           <h2>Personal Cabinet</h2>
           <div className="my-cabinet-container">
-            {strains.map(e => (
+            {props.strains.map(e => (
               <CabinetCard
                 strain={e}
                 key={e.strain_id}
@@ -109,6 +140,5 @@ const mapStateToProps = state => {
     strains: state.strains
   };
 };
-export default connect(mapStateToProps, { GetCabinet, RemoveCabinetStrain })(
-  PersonalCabinet
-);
+
+export default connect(mapStateToProps, { GetCabinet })(PersonalCabinet);
