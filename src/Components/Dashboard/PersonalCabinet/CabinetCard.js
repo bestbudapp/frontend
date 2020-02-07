@@ -1,25 +1,28 @@
-//add heart or plus button
 import React from "react";
+import { fetchCurrentCabinetStrain } from '../../../Actions/ActionCreator';
+import { connect } from "react-redux";
+import { Link } from 'react-router-dom';
+import hybrid from "../../../img/hybrid.png";
+import indica from "../../../img/indica.png";
+import sativa from "../../../img/sativa.png";
 
-const CabinetCard = ({ strain, remove }) => {
+const CabinetCard = ({ strain, remove, fetchCurrentCabinetStrain }) => {
+  const onClick = strain_id => {
+    fetchCurrentCabinetStrain(strain_id);
+  };
+
   return (
-    <div className="cabinet-card">
-      <p className="cabinet-card-name">
-        Name: {strain.name} - {strain.race}{" "}
-      </p>
-      <p className="cabinet-card-rating">Rating: {strain.rating}</p>
-      <p className="cabinet-card-flavors">Flavors: {strain.flavors}</p>
-      <div className="cabinet-card-effects">
-        <p>positive Effects: {strain.positive_effects}</p>
-        <p>negative Effects: {strain.negative_effects}</p>
+    <Link to={`/cabinet/strain/${strain.cabinet_id}`} onClick={() => onClick(strain.strain_id)}>
+      <div className='strain-card'>
+        {/* <button onClick={() => remove(strain)}>Remove</button> */}
+        {strain.race === "sativa" && <img src={sativa} alt="sativa" />}
+        {strain.race === "indica" && <img src={indica} alt="indica" />}
+        {strain.race === "hybrid" && <img src={hybrid} alt="hybrid" />}
+        <p className='name'>{strain.name}</p>
+        <p className='race'>{strain.race}</p>
       </div>
-      <p className="cabinet-card-medical">
-        Medical Uses: {strain.medical_uses}
-      </p>
-      <p className="cabinet-card-desc">Description: {strain.description}</p>
-      <button onClick={() => remove(strain)}>Remove</button>
-    </div>
+    </Link>
   );
 };
 
-export default CabinetCard;
+export default connect(null, {fetchCurrentCabinetStrain})(CabinetCard);

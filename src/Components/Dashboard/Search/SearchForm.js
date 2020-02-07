@@ -1,13 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import * as ActionCreator from "../../../Actions/ActionCreator";
-import { Form, Field, withFormik } from "formik";
 import Header from '../Header';
 import SearchList from './SearchList';
 import styled from 'styled-components';
+import { queryStrains } from '../../../Actions/ActionCreator'
 
 const SearchFormContainer = styled.div`
   background: white;
+
+  .go-back-container {
+    width: 1024px;
+    margin: 0 auto;
+    margin-top: 32px;
+
+    p {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #333;
+      cursor: pointer;
+
+      i {
+        margin-left: 4px;
+        margin-right: 4px;
+        transition: 0.25s;
+      }
+
+      :hover {
+        i {
+          margin-left: 0;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
 
   h2 {
     margin-top: 64px;
@@ -76,132 +101,44 @@ const SearchFormContainer = styled.div`
   }
 `;
 
-// const SearchForm = ({
-//   errors,
-//   touched,
-//   values,
-//   status,
-//   addSearch,
-//   editSearch,
-//   setValues,
-//   resetForm,
-//   SearchList,
-//   SearchToEdit
-// }) => {
-//   const handleSubmit = e => {
-//     e.preventDefault();
-//     if (SearchToEdit > 0) {
-//       editSearch(values);
-//     } else {
-//       addSearch(values);
-//     }
-//     resetForm();
-//   };
-
-//   useEffect(() => {
-//     if (SearchToEdit > 0) {
-//       setValues(SearchList.find(Search => Search.id === SearchToEdit));
-//     }
-//   }, [SearchToEdit, SearchList, setValues]);
-
-//   return (
-//     <SearchFormContainer>
-//       <Form onSubmit={handleSubmit}>
-//         <label className="search-label">Race:</label>
-       
-//          <Field as="select" name="Race">
-//             <option value="sativa">Sativa</option>
-//             <option value="indica">Indica</option>
-//             <option value="hybrid">Hybrid</option>
-//           </Field>
-//         {touched.race && errors.race && (
-//           <span className="error">{errors.race}</span>
-//         )}
-//         <label className="search-label">Type:</label>
-//         <Field as="select" name="Race">
-//             <option value="sativa">Sativa</option>
-//             <option value="indica">Indica</option>
-//             <option value="hybrid">Hybrid</option>
-//           </Field>
-//         {touched.type && errors.type && (
-//           <span className="error">{errors.type}</span>
-//         )}
-//         <label className="search-label">Score:</label>
-//         <Field as="select" name="Race">
-//             <option value="sativa">Sativa</option>
-//             <option value="indica">Indica</option>
-//             <option value="hybrid">Hybrid</option>
-//           </Field>
-//         {touched.score && errors.score && (
-//           <span className="error">{errors.score}</span>
-//         )}
-
-
-//         <label className="search-label">Positive Effects:</label>
-//         <Field as="select" name="Race">
-//             <option value="sativa">Sativa</option>
-//             <option value="indica">Indica</option>
-//             <option value="hybrid">Hybrid</option>
-//           </Field>
-//         {touched.positive_effect_plain && errors.positive_effect_plain && (
-//           <span className="error">{errors.positive_effect_plain}</span>
-//         )}
-//         <label className="search-label">Negative Effects:</label>
-//         <Field as="select" name="Race">
-//             <option value="sativa">Sativa</option>
-//             <option value="indica">Indica</option>
-//             <option value="hybrid">Hybrid</option>
-//           </Field>
-//         {touched.negative_effect_plain && errors.negative_effect_plain && (
-//           <span className="error">{errors.negative_effect_plain}</span>
-//         )}
-
-//         <label className="search-label">Flavor:</label>
-//         <Field as="select" name="Race">
-//             <option value="sativa">Sativa</option>
-//             <option value="indica">Indica</option>
-//             <option value="hybrid">Hybrid</option>
-//           </Field>
-//         {touched.flavor && errors.flavor && (
-//           <span className="error">{errors.flavor}</span>
-//         )}
-        
-        
-//         <button>Submit</button>
-//       </Form>
-//     </SearchFormContainer>
-//   );
-// };
-
-// const FormikReviewForm = withFormik({
-//   mapPropsToValues({
-//     name,
-//     flavor,
-//     race,
-//     positive_effects,
-//     negative_effects,
-//     medical_conditions,
-//     rating
-//   }) {
-//     return {
-//       name: name || "",
-//       flavor: flavor || "",
-//       race: race || "",
-//       positive_effects: positive_effects || "",
-//       negative_effects: negative_effects || "",
-//       medical_conditions: medical_conditions || "",
-//       rating: rating || ""
-//     };
-//   }
-// })(SearchForm);
-
 const SearchForm = props => {
+  const [input, setInput] = useState({
+    filter: 'name',
+    query: ''
+  });
+
+  const onChange = event => {
+    event.preventDefault();
+    setInput({
+      ...input,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  const onSubmit = event => {
+    event.preventDefault();
+    props.queryStrains({
+      filter: input.filter,
+      query: input.query,
+      limit: 30,
+      offset: 0
+      
+  });
+    console.log(input);
+  };
+
   return (
     <SearchFormContainer>
       <Header/>
+
+      <div className='go-back-container'>
+        <p onClick={() => props.history.push('/dashboard')}><i className="fas fa-arrow-left"></i>go back</p>
+      </div>
+
       <h2>Strain Search</h2>
-      <form>
-        <select name='filter'>
+
+      <form onSubmit={onSubmit}>
+        <select name='filter' onChange={onChange}>
           <option value='name'>Name</option>
           <option value='flavors'>Flavor</option>
           <option value='race'>Race</option>
@@ -209,7 +146,7 @@ const SearchForm = props => {
           <option value='rating'>Rating</option>
         </select>
 
-        <input type='text' name='query' placeholder='Enter a query'/>
+        <input type='text' name='query' placeholder='Enter a query' onChange={onChange}/>
 
         <button type='submit'>Submit</button>
       </form>
@@ -219,7 +156,7 @@ const SearchForm = props => {
 };
 
 const mapStateToProps = state => {
-  return {};
+  return {queriedStrains:state.queriedStrains};
 };
 
-export default connect(mapStateToProps, ActionCreator)(SearchForm);
+export default connect(mapStateToProps, {queryStrains})(SearchForm);

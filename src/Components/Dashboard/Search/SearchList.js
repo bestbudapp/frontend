@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { getSearchList } from '../../../Actions/ActionCreator';
 import { Link } from 'react-router-dom';
-import SearchCard from './SearchCard';
 import styled from 'styled-components';
 import hybrid from '../../../img/hybrid.png';
 import indica from '../../../img/indica.png';
@@ -66,66 +64,33 @@ const SearchListContainer = styled.div`
 `;
 
 const SearchList = props => {
-  useEffect(() => {
-    props.getSearchList();
-  }, []);
-
   return (
     <SearchListContainer>
-      {/* this is just the style, you can make the api call, store the list you get back and iterate over it making one of these cards every iteration with a dynamic route*/}
-      {/* wasnt working with props.history.push, i think you may need to pass down props */}
-      
-      <Link to='/strain/1'>
-        <div className='strain-card'>
-            <img src={sativa} alt='sativa'/>
-            {/* based on race i have different images you can render */}
-            <p className='name'>Sour Diesel</p>
-            <p className='race'>sativa</p>
-        </div>
-      </Link>
 
-      <Link to='/strain/1'>
-        <div className='strain-card'>
-            <img src={sativa} alt='sativa'/>
-            {/* based on race i have different images you can render */}
-            <p className='name'>Sour Diesel</p>
-            <p className='race'>sativa</p>
-        </div>
-      </Link>
-
-      <Link to='/strain/1'>
-        <div className='strain-card'>
-            <img src={sativa} alt='sativa'/>
-            {/* based on race i have different images you can render */}
-            <p className='name'>Sour Diesel</p>
-            <p className='race'>sativa</p>
-        </div>
-      </Link>
-
-      <Link to='/strain/1'>
-        <div className='strain-card'>
-            <img src={sativa} alt='sativa'/>
-            {/* based on race i have different images you can render */}
-            <p className='name'>Sour Diesel</p>
-            <p className='race'>sativa</p>
-        </div>
-      </Link>
-
-      <Link to='/strain/1'>
-        <div className='strain-card'>
-            <img src={sativa} alt='sativa'/>
-            {/* based on race i have different images you can render */}
-            <p className='name'>Sour Diesel</p>
-            <p className='race'>sativa</p>
-        </div>
-      </Link>
-
+      {props.queriedStrains.map(item=>{
+        return(
+          <Link key={item.id} to={`/strain/${item.id}`}>
+            <div className='strain-card'>
+              {item.race === "sativa" && <img src={sativa} alt="sativa" />}
+              {item.race === "indica" && <img src={indica} alt="indica" />}
+              {item.race === "hybrid" && <img src={hybrid} alt="hybrid" />}
+              <p className='name'>{item.name}</p>
+              <p className='race'>{item.race}</p>
+            </div>
+          </Link>
+        )
+      })}
+    
     </SearchListContainer>
   );
 };
 
+
+
 const mapStateToProps = state => {
-  return {};
+  return {
+    queriedStrains: state.queriedStrains
+  };
 };
 
-export default connect(mapStateToProps, {getSearchList})(SearchList);
+export default connect(mapStateToProps)(SearchList);

@@ -18,9 +18,12 @@ const HeaderContainer = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-
-        img {
-            height: 64px;
+        
+        a {
+            img {
+                height: 64px;
+                cursor: pointer;
+            }
         }
 
         nav {
@@ -57,17 +60,21 @@ const HeaderContainer = styled.div`
 `;
 
 const Header = () => {
+    const signout = () => {
+        localStorage.removeItem("token")
+        localStorage.removeItem("user_id")
+    }
+
     return(
         <HeaderContainer>
             <div className='header-container'>
-                <img src={logo} alt='bestbud logo'/>
+                <Link to='/dashboard'><img src={logo} alt='bestbud logo'/></Link>
                 <nav>
                     <Link to='/recommender'>Recommender</Link>
                     <Link to='/strains'>Strain Search</Link>
                     <Link to='/cabinet'>My Cabinet</Link>
                 </nav>
-                <Link to='/' className='sign-out'>Sign Out</Link>
-                {/* needs to remove token from local storage, you can probably even leave out the redirect since the private route component does that for you */}
+                <Link to='/' className='sign-out' onClick={signout}>Sign Out</Link>
             </div>
         </HeaderContainer>
     );
