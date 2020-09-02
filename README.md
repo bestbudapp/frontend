@@ -1,6 +1,6 @@
 # Description 
 
-A web that educates new medical cannabis consumers and allows them to find the right strain as a means to battle medical conditions and ailments.
+A web that educates new medical cannabis consumers and allows them to find the right strain of cannabis as a means to battle medical conditions and ailments.
 
 # Tech Stack
 
